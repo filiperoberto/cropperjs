@@ -472,13 +472,27 @@ export default {
         && cropBoxData.height >= containerData.height ? ACTION_MOVE : ACTION_ALL);
     }
 
+    // TODO: Se for half moon, tem que mexer em algum
+    // lugar aqui no style, botar metade width ou metade height
+
     setStyle(this.cropBox, assign({
       width: cropBoxData.width,
       height: cropBoxData.height,
+      'border-top-left-radius': cropBoxData.topLeftRadius,
+      'border-bottom-left-radius': cropBoxData.topBottomRadius,
+      'border-top-right-radius': cropBoxData.topRightRadius,
+      'border-bottom-right-radius': cropBoxData.topRightRadius,
     }, getTransforms({
       translateX: cropBoxData.left,
       translateY: cropBoxData.top,
     })));
+
+    setStyle(this.viewBox, assign({
+      'border-top-left-radius': cropBoxData.topLeftRadius,
+      'border-bottom-left-radius': cropBoxData.topBottomRadius,
+      'border-top-right-radius': cropBoxData.topRightRadius,
+      'border-bottom-right-radius': cropBoxData.topRightRadius,
+    }));
 
     if (this.cropped && this.limited) {
       this.limitCanvas(true, true);
